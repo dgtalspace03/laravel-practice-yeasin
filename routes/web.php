@@ -3,19 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-Route::get('/', function (Request $request) {
-
-    $search=$request->query('search');
-    if($search){
-         $notes= DB::table('note')->Where("title","like","%{$search}%")->orWhere('content','like',"%{$search}%")->get();
-    }
-
-    else{
-        $notes= DB::table('note')->get();
-    }
-
-    return view('index',compact('notes','search'));
-});
+use App\Http\Controllers\NoteController;
+Route::get('/',[NoteController::class, "index"]);
 Route::get('/about',function(){
     return view('about');
 }); 
@@ -23,19 +12,19 @@ Route::get('/create',function(){
     return view('create');
 });
 
-
-Route::post('/note/create',function(Request $request){
-    $request->validate([
-        "title"=> 'required',
-        "content"=>'required'
-    ]);
-    $title=$request->input('title');
-    $content=$request->input('content');
-    DB::table('note')->insert([
-        "title"=>$title,
-        "content"=>$content,
-        'created_at' => now(),
-        'updated_at' => now()
-    ]);
-    return redirect('/')->with('success', 'Note created successfully!');
+Route::get('/edit/{id}',function($id){
+     $note=DB::table('note')->Where('id',$id)->first();;
+    if(!$note){
+      abort(404);
+    }
+    return view('edit',compact('note'));
 });
+Route::post('/note/create',[NoteController::class, "create"]);
+Route::delete('/note/delete/{id}',[NoteController::class, "delete"]);
+
+Route::put('/note/edit/{id}',[NoteController::class, "edit"]);
+
+
+Route::get('/admin',function(){
+return 'Welcome Admin!';
+})->middleware('admin');

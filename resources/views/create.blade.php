@@ -16,7 +16,7 @@
             @csrf
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+    <input type="string" value="{{ old('title') }}" class="form-control" id="title" name="title" aria-describedby="emailHelp">
     @error('title')
     <div class="text-danger">{{ $message }}</div>
     @enderror
@@ -24,7 +24,7 @@
   </div>
   <div class="mb-3">
     <label for="content" class="form-label">Text Content</label>
-     <textarea class="form-control" name="content" placeholder="Enter your note content" id="floatingTextarea2" style="height: 100px"></textarea>
+     <textarea class="form-control" name="content" placeholder="Enter your note content" id="floatingTextarea2" style="height: 100px">{{ old('content') }}</textarea>
       @error('content')
     <div class="text-danger">{{ $message }}</div>
     @enderror

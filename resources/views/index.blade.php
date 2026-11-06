@@ -27,7 +27,7 @@
 @endif
 <div class="d-flex align-items-center flex-wrap gap-3 w-100 px-4">
   @foreach ($notes as $note)
-    <x-card title="{{ $note->title }}"  content="{{ $note->content }}"/>
+    <x-card title="{{ $note->title }}"  content="{{ $note->content }}" id="{{ $note->id }}"/>
   @endforeach
 </div>
 </body>

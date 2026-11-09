@@ -15,7 +15,7 @@
     </div>
 @endif
  <x-navbar app_name="i-Note"/>
-<h2 class="text-center">Easily Manage All of your notes</h2>
+<h2 class="text-center">Hello {{ auth()->user()->name }} Manage All of your notes</h2>
 <div class="d-flex w-100 align-items-center justify-content-end my-3 px-4 box-border">
     <a href="/create" class="btn btn-primary">Add Note</a>
 </div>
@@ -27,7 +27,7 @@
 @endif
 <div class="d-flex align-items-center flex-wrap gap-3 w-100 px-4">
   @foreach ($notes as $note)
-    <x-card title="{{ $note->title }}"  content="{{ $note->content }}" id="{{ $note->id }}"/>
+    <x-card title="{{ $note->title }}"  content="{{ $note->content }}" id="{{ $note->id }}" thumblain="{{ $note->thumblain }}"/>
   @endforeach
 </div>
 </body>

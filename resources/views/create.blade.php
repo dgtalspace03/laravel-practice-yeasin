@@ -12,7 +12,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-        <form action="/note/create" method="POST">
+        <form action="/note/create" method="POST" enctype="multipart/form-data">
             @csrf
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
@@ -26,6 +26,13 @@
     <label for="content" class="form-label">Text Content</label>
      <textarea class="form-control" name="content" placeholder="Enter your note content" id="floatingTextarea2" style="height: 100px">{{ old('content') }}</textarea>
       @error('content')
+    <div class="text-danger">{{ $message }}</div>
+    @enderror
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Thumblain</label>
+     <input class="form-control" type="file" id="formFile" name="thumblain">
+      @error('thumblain')
     <div class="text-danger">{{ $message }}</div>
     @enderror
   </div>
